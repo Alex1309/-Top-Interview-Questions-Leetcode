@@ -1,64 +1,44 @@
-//============================================================================
-// Name        : Valid.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
-#include <iostream>
-using namespace std;
-
-int main() {
-
-
-string s ="[[()]]";
-
-bool valid = true;
-
-
-int pos =0;
-char last = ' ';
+class Solution {
+public:
+    bool isValid(string s) {
+        vector<char>stack;
+        bool valid = true;
 int charLast=0;
 char now=' ';
 int charNow=0;
-int p=s.length();
-while(true){
+        int d=0;
+        stack.push_back('#');
 
-	int v=0;
+for(int i=0;i<s.length();i++){
 
-	if(s.at(pos)=='(' or s.at(pos)=='[' or s.at(pos)=='{'){
+	if(s.at(i)=='(' or s.at(i)=='[' or s.at(i)=='{'){
+		if(i==0)
+			stack.pop_back();
+		stack.push_back(s.at(i));
 
-		last = s.at(pos);
-		charLast=int(last);
-		pos++;
-
-		cout<<charLast<<" "<<last <<" "<<pos<<endl;
 	}
-	if(s.at(pos)==')' or s.at(pos)==']' or s.at(pos)=='}'){
-		now = s.at(pos);
+	else if((s.at(i)==')' or s.at(i)==']' or s.at(i)=='}') and stack.size()>0){
+		now = s.at(i);
 		charNow=int(now);
+		charLast = int(stack.at(stack.size()-1));
 
-		cout<<charNow<<" "<<now<<endl;
-
-		if(charLast+2==charNow or charLast+1==charNow){
-		    s.erase(pos-1, pos);
-			pos=0;
-			p-=2;
-			if(p==0){
-				break;
-			}
+		if((charLast+2==charNow or charLast+1==charNow) and stack.size()>0){
+			stack.pop_back();
 		}else{
-			valid=false;
+			valid =false;
 			break;
-
 		}
-
-	}if(pos==p-1){
+	}else if((s.at(i)==')' or s.at(i)==']' or s.at(i)=='}') and stack.size()==0){
+		d=1;
 		break;
 	}
-		
 
 }
-
-}
+	if(stack.size()==0 and d==0){
+		valid =true;
+	}else{
+		valid =false;
+	}
+        return valid;
+    }
+};
