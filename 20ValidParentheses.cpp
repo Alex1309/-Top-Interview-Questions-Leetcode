@@ -42,3 +42,36 @@ for(int i=0;i<s.length();i++){
         return valid;
     }
 };
+//other option
+class Solution {
+public:
+    bool isValid(string s) {
+		stack<int>stack;
+        bool valid = true;
+		int c=0;
+
+	for(int i=0;i<s.length();i++){
+		if(i==0 and (s.at(i)=='(' or s.at(i)=='[' or s.at(i)=='{'))
+			c=1;
+		
+		if(s.at(i)=='(' and c==1)
+			stack.push(s.at(i));
+		else if(s.at(i)=='[' and c==1)
+			stack.push(s.at(i));
+		else if(s.at(i)=='{' and c==1)
+			stack.push(s.at(i));	
+		else if(s.at(i)==')' and stack.top()=='(' and !stack.empty())
+			stack.pop();
+		else if(s.at(i)==']' and stack.top()=='['  and !stack.empty())
+			stack.pop();
+		else if(s.at(i)=='}' and stack.top()=='{' and  !stack.empty())
+			stack.pop();
+	}
+		if(stack.empty() and c==1){
+			valid =true;
+		}else{
+			valid =false;
+		}
+			return valid;
+		}
+};
