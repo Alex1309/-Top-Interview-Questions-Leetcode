@@ -89,3 +89,21 @@ public:
         return result;
     }
 };
+
+//other option 0 ms
+class Solution {
+public:
+    string intToRoman(int n) {
+        int num[] ={1,4,5,9,10,40,50,90,100,400,500,900,1000};
+        string letters[] = {"I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"};
+        string result ="";
+        for(int i=12;i>=0;i--){
+            int current =n/num[i];
+            for(int j=0;j<current;j++){
+                result+=letters[i];
+            }
+            n = n%num[i];
+        }
+        return result;
+    }
+};
