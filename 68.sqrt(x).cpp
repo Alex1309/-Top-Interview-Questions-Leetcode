@@ -31,3 +31,56 @@ public:
 	return a[i-1];
     }
 };
+// Other solution 12 ms
+class Solution {
+public:
+    int mySqrt(int x) {
+    		int max = 2147483646;
+	int v=0;
+	if(x==0 or x==1)
+		return x;
+
+	int i=1;int r=1;
+	while(r<=x){
+
+		if(i>=46340){
+			v=1;
+			break;
+
+		}
+		i++;
+		r = i*i;
+	}
+	if(v==1)
+		return i;
+	return i-1;
+    }
+};
+//Other solcuion 0 ms
+class Solution {
+public:
+    int mySqrt(int x) {
+    	
+        
+	int l =0;
+	int u=46340;
+    int a =0;
+	if(x==0 or x==1)
+		return x;
+	
+	while(l<=u){
+		long m = (l+u)/2;
+        
+		if(m*m==x)
+			return m;
+
+		if(m<=x/m){
+			l = m+1;
+            a = m;
+		}else{
+			u = m-1;
+		}
+    }
+        return a;
+    }
+};
