@@ -16,3 +16,20 @@ public:
 	return sums[sums.size()-1];
 }
 };
+
+//Runtime 8 ms 
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+	int sum=0;
+	vector<int> sums;
+	for(int i=0;i<nums.size();i++){
+		sum+=nums[i];
+		sums.push_back(sum);
+		if(sum<0)
+			sum=0;
+	}
+	sort(sums.begin(),sums.end());
+	return sums[sums.size()-1];
+}
+};
