@@ -29,3 +29,30 @@ public:
         return maxi;
     }
 };
+// solution 44 ms
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+	int left =0;
+	int longest=0;
+	map <int,int> count;
+	for(int right=0;right<s.length() ; ){
+
+		if(count.find(s.at(right)) == count.end()){
+			count[s.at(right)]=0;
+		}
+		count[s.at(right)]+=1;
+		map<string, int>::iterator it;
+
+		for (auto const& [key, val] : count){
+			if(val>1){
+				count[s.at(left)]-=1;
+				left+=1;
+			}				
+		}
+		longest = max(longest,right-left+1);
+		right++;
+	}
+	return longest;
+	}
+};
